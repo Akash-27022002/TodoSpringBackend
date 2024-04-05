@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import com.example.todolist.models.Todo;
 import com.example.todolist.repository.TodoJpaRepository;
 import com.example.todolist.repository.TodoRepository;
+
+import jakarta.validation.Valid;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +28,7 @@ public class TodoJpaService implements TodoRepository {
     }
 
     @Override
-    public Todo createTodo(Todo todo) {
+    public Todo createTodo(@Valid Todo todo) {
         return todoJpaRepository.save(todo);
     }
 
@@ -36,11 +39,13 @@ public class TodoJpaService implements TodoRepository {
     }
     
     @Override
-    public Todo updateTodo(int id, Todo todoDetails) {
+    public Todo updateTodo(int id, @Valid Todo todoDetails) {
         Optional<Todo> optionalTodo = todoJpaRepository.findById(id);
         if (optionalTodo.isPresent()) {
             Todo todo = optionalTodo.get();
             todo.setStatus(todoDetails.getStatus());
+            todo.setPriority(todoDetails.getPriority());
+            todo.setTodo(todoDetails.getTodo());
             return todoJpaRepository.save(todo);
         } else {
             return null;
