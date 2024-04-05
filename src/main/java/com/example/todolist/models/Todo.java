@@ -16,6 +16,11 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    /**
+     * 
+     * [NotNull]
+     */
+
     @NotNull(message = "Todo Cannot Be null")
     @NotBlank(message = "Todo Cannot Be Blank")
     private String todo;
@@ -24,6 +29,16 @@ public class Todo {
     @NotNull(message = "Priority Cannot Be null")
     private String priority;
 
+   
+    
+    /**
+     * @param NotBlank
+     *          This NotBlank Annotation allow your Data Class that Cannot Be blank 
+     *          In Db and As Well as in Object of the Todo Data class and such type of annotation we used for data validation
+     *          in SpringBoot
+     * @param NotNull
+     * 
+     **/
     @NotBlank(message = "Todo Status Be Blank")
     @NotNull(message = "Status Cannot Be null")
     private String status;
@@ -31,6 +46,12 @@ public class Todo {
     // Default constructor (no-argument constructor)
     public Todo() {}
 
+    /**
+     * 
+     * @param todo
+     * @param priority
+     * @param status
+     */
     public Todo(String todo, String priority, String status) {
         this.todo = todo;
         this.priority = priority;
@@ -68,8 +89,5 @@ public class Todo {
     public String toString() {
         return "Todo [id=" + id + ", todo=" + todo + ", priority=" + priority + ", status=" + status + "]";
     }
-
-    
-    // Constructors, getters, and setters
     
 }
